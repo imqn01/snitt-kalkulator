@@ -23,7 +23,7 @@ def parse_block(block):
     return None
 def calculate_grade_average(pdf_path, verbose=False):
     if not os.path.exists(pdf_path):
-        return {"error": f"Cannot find PDF: {pdf_path}"}
+        return None
     
     total_points = 0 
     total_weight = 0
@@ -52,11 +52,11 @@ def calculate_grade_average(pdf_path, verbose=False):
                         print(f"{course['code']} {course['name']} ({course['term']}): "
                         f"{course['studypoints']} stp, karakter {course['grade']} → {weight:.1f} poeng")
     if total_points <=0: 
-        return{"error":"No valid courses found"}
+        return None
     total_average = round(total_weight/total_points, 2)
     return {
-        "Total average": total_average,
-        "Courses": results
+        "average_grade": total_average,
+        "courses": results
             }
 
 average = calculate_grade_average("testVit.pdf")
