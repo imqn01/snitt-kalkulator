@@ -19,34 +19,46 @@ def parse_block(block):
                 "grade": grade
             }
     except ValueError:
-        pass
+        return None
     return None
-def calculate_grade_average(pdf_path):
+def calculate_grade_average(pdf_path, verbose=False):
     if not os.path.exists(pdf_path):
-        print(f"Finner ikke PDF: {pdf_path}")
-        return
-    doc = pymupdf.open(pdf_path)
-    page = doc.load_page(0)
-    blocks = page.get_text("blocks", sort = True)
+        return {"error": f"Cannot find PDF: {pdf_path}"}
     
-    total_points = 0
+    total_points = 0 
     total_weight = 0
+    results = []
     
-    for block in blocks:
-        course = parse_block(block)
-        if course: 
-            grade_value = GRADE_POINTS[course["grade"]]
-            weight = grade_value * course["studypoints"]
-            total_weight += weight
-            total_points += course["studypoints"]
-            
-            print(f"{course['code']} {course['name']} ({course['term']}): "
-                  f"{course['studypoints']} stp, karakter {course['grade']} → {weight:.1f} poeng")
+    with pymupdf.open(pdf_path) as doc: 
+        for page in doc: 
+            blocks = page.get_text("blocks", sort = True)
+            for block in blocks:
+                course = parse_block(block)
+                if course: 
+                    grade_value = GRADE_POINTS[course["grade"]]
+                    weight = grade_value * course["studypoints"]
+                    total_weight += weight
+                    total_points += course["studypoints"]
+                    results.append({
+                        "code": course["code"],
+                        "name": course["name"],
+                        "term": course["term"],
+                        "studypoints": course["studypoints"],
+                        "grade": course["grade"],
+                        "weight": round(weight, 2)
+                        
+                    })
+                    if verbose: 
+                        print(f"{course['code']} {course['name']} ({course['term']}): "
+                        f"{course['studypoints']} stp, karakter {course['grade']} → {weight:.1f} poeng")
     if total_points <=0: 
-        print("No valid courses found")
-        return "No valid courses found"
+        return{"error":"No valid courses found"}
     total_average = round(total_weight/total_points, 2)
-    return total_average
+    return {
+        "Total average": total_average,
+        "Courses": results
+            }
 
-average = calculate_grade_average("2024.pdf")
-print(f"Totalt snitt: {average}")
+average = calculate_grade_average("testVit.pdf")
+if average is not None: 
+    print(f"Totalt snitt: {average}")
