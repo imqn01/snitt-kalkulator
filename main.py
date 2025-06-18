@@ -1,8 +1,9 @@
 import pymupdf
+import os
+
 GRADE_POINTS = {"A":5, "B":4, "C":3, "D":2, "E":1}
 
 def parse_block(block):
-    #Extracts course data from a block 
     lines = block[4].strip().split("\n")
     if len(lines) < 5:
         return None
@@ -21,6 +22,9 @@ def parse_block(block):
         pass
     return None
 def calculate_grade_average(pdf_path):
+    if not os.path.exists(pdf_path):
+        print(f"Finner ikke PDF: {pdf_path}")
+        return
     doc = pymupdf.open(pdf_path)
     page = doc.load_page(0)
     blocks = page.get_text("blocks", sort = True)
@@ -36,12 +40,13 @@ def calculate_grade_average(pdf_path):
             total_weight += weight
             total_points += course["studypoints"]
             
-            print(f"{course["code"]} – {course["name"]} ({course["term"]}): "
-                  f"{course["studypoints"]} stp, karakter {course["grade"]} → {weight:.1f} poeng")
+            print(f"{course['code']} {course['name']} ({course['term']}): "
+                  f"{course['studypoints']} stp, karakter {course['grade']} → {weight:.1f} poeng")
     if total_points <=0: 
         print("No valid courses found")
-        return
+        return "No valid courses found"
     total_average = round(total_weight/total_points, 2)
-    print(total_average)
-    
-calculate_grade_average("2024.pdf")
+    return total_average
+
+average = calculate_grade_average("2024.pdf")
+print(f"Totalt snitt: {average}")
