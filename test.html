@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Snitt Kalkulator</title>
+  <style>
+    :root {
+      --main-bg: #5b5068;
+      --tab-bg: #f0f0f0;
+      --tab-radius: 20px;
+    }
+
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: var(--main-bg);
+      border-radius: var(--tab-radius);
+      width: 90%;
+      max-width: 900px;
+      padding-top: 60px;
+      position: relative;
+    }
+
+    .tabs {
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding-left: 15px;
+      gap: 5px;
+      height: 60px;
+    }
+
+    .tab {
+      position: relative;
+      background-color: var(--tab-bg);
+      padding: 12px 20px;
+      margin-top: 10px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      border-top-left-radius: var(--tab-radius);
+      border-top-right-radius: var(--tab-radius);
+      font-weight: normal;
+      color: black;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background-color: var(--main-bg);
+      color: white;
+      margin-top: 0;
+      height: 60px;
+    }
+
+    .tab.active::before,
+    .tab.active::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      bottom: -10px;
+      background: white;
+      z-index: 2;
+    }
+
+    .tab.active::before {
+      left: 0;
+      border-bottom-left-radius: 20px;
+    }
+
+    .tab.active::after {
+      right: 0;
+      border-bottom-right-radius: 20px;
+    }
+
+    .content {
+      background: white;
+      padding: 40px;
+      border-bottom-left-radius: var(--tab-radius);
+      border-bottom-right-radius: var(--tab-radius);
+      min-height: 300px;
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="tabs">
+      <div class="tab active">% Automatisk snitt kalkulator</div>
+      <div class="tab">Snitt kalkulator</div>
+      <div class="tab">Hvordan snittet utregnes</div>
+    </div>
+    <div class="content">
+      <p>Velkommen til snittkalkulatoren!</p>
+    </div>
+  </div>
+</body>
+</html>

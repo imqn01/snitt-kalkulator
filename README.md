@@ -1,0 +1,2 @@
+# Important information regarding accepting pdf-files
+Since Studentweb and Vitnemålsportalen present the data in the diplomas differently, this program only accepts signed diplomas from vitnemålsportalen. 
