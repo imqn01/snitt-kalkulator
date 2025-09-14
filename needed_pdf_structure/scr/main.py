@@ -1,6 +1,6 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 import os
-from calculator import calculate_grade_average
+from needed_pdf_structure.scr.calculator import calculate_grade_average
 
 app = FastAPI()
 

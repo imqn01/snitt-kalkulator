@@ -59,6 +59,6 @@ def calculate_grade_average(pdf_path, verbose=False):
         "courses": results
             }
 
-average = calculate_grade_average("tester20.pdf") #INSERT PDF HERE
+average = calculate_grade_average("pdfname") #INSERT PDF HERE instead of pdfname
 if average is not None: 
     print(f"Totalt snitt: {average}")
