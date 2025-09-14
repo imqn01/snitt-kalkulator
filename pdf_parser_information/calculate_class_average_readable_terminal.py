@@ -1,6 +1,6 @@
 import pymupdf
 
-doc = pymupdf.open("2025.pdf")
+doc = pymupdf.open("tester20.pdf") #INSERT PDF HERE
 
 page = doc.load_page(0)
 
@@ -21,3 +21,5 @@ for block in blocks:
             termin = lines[2]
             average = studypoint * grade_characters[grade]
             print(f"{emnekode} {emnenavn} ({termin}): {studypoint} {grade}: {average} \n")
+            
+            
