@@ -26,5 +26,5 @@ The acquired pdf-version can be used in this project.
 ### Step: 2 Get your calculated grade average in the terminal 
 1. Download the project. 
 2. Move the acquired pdf from Step 1 into the project folder
-3. Insert the pdf-name where the "INSERT PDF HERE" comment is at the bottom of the page in [the calculator](needed_pdf_structure/scr/calculator.py). The first line in the terminal displays your grade average: {'average_grade': x.xx}
+3. Insert the pdf-name where the "INSERT PDF HERE" comment is at the bottom of the page in [the calculator](scr/calculator.py). The first line in the terminal displays your grade average: {'average_grade': x.xx}
 
