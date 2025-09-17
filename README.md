@@ -14,6 +14,7 @@ By using the files in the “pdf_parser_information” folder, it became apparen
 For the time being, this project works exclusively with signed diplomas from Vitnemålsportalen.
 
 # How to use the calculator 
+To use this calculator for the time being, pymupdf needs to be downloaded.
 ### Step 1: Get the correct diploma files
 1. Go to [Vitnemålsportalen](https://www.vitnemalsportalen.no) and log in.
 2. Go to my results and choose those classes you want to include in the calculation.
